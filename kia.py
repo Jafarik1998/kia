@@ -10,7 +10,6 @@ import pandas as pd  # pip install pandas
 import plotly.express as px  # pip install plotly-express
 import base64  # Standard Python Module
 from io import StringIO, BytesIO  # Standard Python Module
-print(pd.__version__)
 
 def generate_excel_download_link(df):
     # Credit Excel: https://discuss.streamlit.io/t/how-to-add-a-download-excel-csv-function-to-a-button/4474/5
@@ -47,8 +46,7 @@ if uploaded_file:
 
     # -- GROUP DATAFRAME
     df_grouped = df.groupby(by=[groupby_column], as_index=False).value_counts()
-    
-  
+   
     
     # -- PLOT DATAFRAME 
     fig_h = px.histogram(df_grouped, x=groupby_column)
@@ -56,12 +54,6 @@ if uploaded_file:
 
     st.plotly_chart(fig_h)
     st.plotly_chart(fig_p)
-    
-    # -- DOWNLOAD SECTION
-#    st.subheader('Downloads:')
-#    generate_excel_download_link(df_grouped)
-#    generate_html_download_link(fig)
-
 
     
 if uploaded_file:
@@ -142,81 +134,13 @@ if uploaded_file:
 
        ('جنسيت', 'وضعيت تاهل', 'تعداد فرزند', 'وضعيت خدمت', 'دليل معافيت', 'شهر محل سكونت', 'نوع محل سكونت', 'گروه خوني', 'وضعيت', 'نام بانك', 'استخدام', 'مكان استقرار', 'نام واحد', 'گروه شغلي', 'واحد سرپرست', 'نوع مدرك', 'رشته تحصيلي', 'حوزه فعاليت', 'مليت'),
   )  
-   # dff2 = df[button2].unique()
-   # list2 = dff2.tolist()
-
-   
-   # if button2 == "جنسيت":
-   #     b2 = st.multiselect("جنسیت را انتخاب کنید", (list2))  
-   
-   # elif  button2 == "وضعيت تاهل":
-   #     b2 = st.radio("وضعيت تاهل را انتخاب کنید", (list2))  
-       
-   # elif  button2 == "تعداد فرزند":
-   #     b2 = st.radio("تعداد فرزند را انتخاب کنید", (list2))
-       
-   # elif  button2 == "وضعيت خدمت":
-   #     b2 = st.radio("وضعيت خدمت را انتخاب کنید", (list2))
   
-   # elif button2 == "دليل معافيت":
-   #     b2 = st.radio("دليل معافيت را انتخاب کنید", (list2))  
-   
-   # elif button2 == "شهر محل سكونت":
-   #     b2 = st.radio("شهر محل سكونت را انتخاب کنید", (list2))  
-   
-   # elif button2 == "نوع محل سكونت":
-   #     b2 = st.radio("نوع محل سكونت را انتخاب کنید", (list2))  
-   
-   # elif button2 == "گروه خوني":
-   #     b2 = st.radio("گروه خوني را انتخاب کنید", (list2))  
-  
-   # elif button2 == "وضعيت":
-   #     b2 = st.radio("وضعيت را انتخاب کنید", (list2))  
-  
-   # elif button2 == "نام بانك":
-   #     b2 = st.radio("نام بانك را انتخاب کنید", (list2))  
-   
-   # elif button2 == "استخدام":
-   #     b2 = st.radio("استخدام را انتخاب کنید", (list2))  
-   
-   # elif button2 == "مكان استقرار":
-   #     b2 = st.radio("مكان استقرار را انتخاب کنید", (list2))  
-      
-   # elif button2 == "نام واحد":
-   #     b2 = st.radio("نام واحد را انتخاب کنید", (list2))  
-  
-   # elif button2 == "گروه شغلي":
-   #     b2 = st.radio("گروه شغلي را انتخاب کنید", (list2))  
-   
-   # elif button2 == "واحد سرپرست":
-   #     b2 = st.radio("واحد سرپرست را انتخاب کنید", (list2))  
-   
-   # elif button2 == "نوع مدرك":
-   #     b2 = st.radio("نوع مدرك را انتخاب کنید", (list2))  
-   
-   # elif button2 == "رشته تحصيلي":
-   #     b2 = st.radio("رشته تحصيلي را انتخاب کنید", (list2))  
-   
-   # elif button2 == "حوزه فعاليت":
-   #     b2 = st.radio("حوزه فعاليت را انتخاب کنید", (list2))  
-   
-   # elif button2 == "مليت":
-   #     b2 = st.radio("مليت را انتخاب کنید", (list2))  
-    
-
    df_var = df.loc[df[button] == b1]
    
    df_var2 = df_var.groupby(by=[button2], as_index=False).value_counts()
    #df_var2 = df_var.loc[df_var[button2] == b2]
    st.write(df_var2)
-   # df_var2 = df_var.groupby(by=[var2], as_index=False)
-   # df_var3 = df_var.groupby(by=[var3], as_index=False).value_counts()
-   
-   
-   # fig_s = px.sunburst(df_var, path=[var1, var2, var3], values=df_var)
-   # st.plotly_chart(fig_s)
-   
-   
+
    fig_h2 = px.histogram(df_var2, x=button2)
    fig_p2 = px.pie(df_var2, names=button2)
 
