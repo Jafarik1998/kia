@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 
-
 @author: Kasi
 """
 
@@ -11,8 +10,8 @@ import plotly.express as px  # pip install plotly-express
 import base64  # Standard Python Module
 from io import StringIO, BytesIO  # Standard Python Module
 
+print(pd.__version__)
 def generate_excel_download_link(df):
-    # Credit Excel: https://discuss.streamlit.io/t/how-to-add-a-download-excel-csv-function-to-a-button/4474/5
     towrite = BytesIO()
     df.to_excel(towrite, encoding="utf-8", index=False, header=True)  # write to BytesIO buffer
     towrite.seek(0)  # reset pointer
@@ -21,7 +20,6 @@ def generate_excel_download_link(df):
     return st.markdown(href, unsafe_allow_html=True)
 
 def generate_html_download_link(fig):
-    # Credit Plotly: https://discuss.streamlit.io/t/download-plotly-plot-as-html/4426/2
     towrite = StringIO()
     fig.write_html(towrite, include_plotlyjs="cdn")
     towrite = BytesIO(towrite.getvalue().encode())
@@ -46,7 +44,8 @@ if uploaded_file:
 
     # -- GROUP DATAFRAME
     df_grouped = df.groupby(by=[groupby_column], as_index=False).value_counts()
-   
+    
+  
     
     # -- PLOT DATAFRAME 
     fig_h = px.histogram(df_grouped, x=groupby_column)
@@ -54,8 +53,8 @@ if uploaded_file:
 
     st.plotly_chart(fig_h)
     st.plotly_chart(fig_p)
-
     
+   
 if uploaded_file:
    df = pd.read_excel(uploaded_file, engine='openpyxl')
       
@@ -134,13 +133,14 @@ if uploaded_file:
 
        ('جنسيت', 'وضعيت تاهل', 'تعداد فرزند', 'وضعيت خدمت', 'دليل معافيت', 'شهر محل سكونت', 'نوع محل سكونت', 'گروه خوني', 'وضعيت', 'نام بانك', 'استخدام', 'مكان استقرار', 'نام واحد', 'گروه شغلي', 'واحد سرپرست', 'نوع مدرك', 'رشته تحصيلي', 'حوزه فعاليت', 'مليت'),
   )  
-  
+
    df_var = df.loc[df[button] == b1]
    
    df_var2 = df_var.groupby(by=[button2], as_index=False).value_counts()
-   #df_var2 = df_var.loc[df_var[button2] == b2]
-   st.write(df_var2)
 
+   st.write(df_var2)
+   
+   
    fig_h2 = px.histogram(df_var2, x=button2)
    fig_p2 = px.pie(df_var2, names=button2)
 
