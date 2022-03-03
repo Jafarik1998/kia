@@ -10,7 +10,7 @@ import plotly.express as px  # pip install plotly-express
 import base64  # Standard Python Module
 from io import StringIO, BytesIO  # Standard Python Module
 
-print(pd.__version__)
+
 def generate_excel_download_link(df):
     towrite = BytesIO()
     df.to_excel(towrite, encoding="utf-8", index=False, header=True)  # write to BytesIO buffer
@@ -43,13 +43,14 @@ if uploaded_file:
     )
 
     # -- GROUP DATAFRAME
-    df_grouped = df.groupby(by=[groupby_column], as_index=False).value_counts()
-    
-  
+    #df_grouped = df.groupby(by=[groupby_column], as_index=False).value_counts()
+    df_grouped = df.groupby(by=[groupby_column], as_index=False)
+    a = df_grouped[groupby_column].value_counts()
+    st.write(a)
     
     # -- PLOT DATAFRAME 
-    fig_h = px.histogram(df_grouped, x=groupby_column)
-    fig_p = px.pie(df_grouped, names=groupby_column)
+    fig_h = px.histogram(df_grouped.value_counts(), x=groupby_column)
+    fig_p = px.pie(df_grouped.value_counts(), names=groupby_column)
 
     st.plotly_chart(fig_h)
     st.plotly_chart(fig_p)
