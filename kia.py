@@ -45,7 +45,7 @@ if uploaded_file:
     # -- GROUP DATAFRAME
     #df_grouped = df.groupby(by=[groupby_column], as_index=False).value_counts()
     df_grouped = df.groupby(by=[groupby_column], as_index=False)
-    st.write(a)
+
     
     # -- PLOT DATAFRAME 
     fig_h = px.histogram(df_grouped.value_counts(), x=groupby_column)
