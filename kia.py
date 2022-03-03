@@ -45,7 +45,6 @@ if uploaded_file:
     # -- GROUP DATAFRAME
     #df_grouped = df.groupby(by=[groupby_column], as_index=False).value_counts()
     df_grouped = df.groupby(by=[groupby_column], as_index=False)
-    a = df_grouped[groupby_column].value_counts()
     st.write(a)
     
     # -- PLOT DATAFRAME 
